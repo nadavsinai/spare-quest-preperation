@@ -69,3 +69,13 @@ class JetEngine extends Engine {
 
 const myJet = new JetEngine(new YeOldePetrolFuelSupply());
 myJet.start(); //?
+ /// in class exercise
+
+ /*
+ write another class extending Engine base class, which takes another kind of FuelSupply. make sure to include
+ 1. private and public members
+ 2. at least one method/override which changes state
+ 3. call to super's methods in one of the methods
+
+
+ * */
