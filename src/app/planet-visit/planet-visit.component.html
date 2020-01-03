@@ -2,7 +2,10 @@
   <app-headquarters></app-headquarters>
 </ng-container>
 <ng-template #otherPlanets>
-  <p> visiting {{planet}}</p>
+  <h2 class="section-label"> Visiting {{planet}}</h2>
+  <section class="planet-wrapper">
+    <app-planet [planetName]="planet|lowercase"></app-planet>
+  </section>
 </ng-template>
 
-<button routerLink="/">Back</button>
+<button class="nav-button" routerLink="/">Back</button>
