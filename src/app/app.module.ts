@@ -8,6 +8,8 @@ import {FooterComponent} from './footer/footer.component';
 import { HeadquartersComponent } from './main/headquarters/headquarters.component';
 import { PlanetVotesComponent } from './main/planet-votes/planet-votes.component';
 import { PlanetComponent } from './main/planet-votes/planet/planet.component';
+import {RouterModule} from '@angular/router';
+import {plantsAppRoutes} from './app.routes';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,8 @@ import { PlanetComponent } from './main/planet-votes/planet/planet.component';
         PlanetComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        RouterModule.forRoot(plantsAppRoutes)
     ],
     providers: [],
     bootstrap: [AppComponent]
