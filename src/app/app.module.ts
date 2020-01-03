@@ -11,6 +11,9 @@ import { PlanetComponent } from './main/planet-votes/planet/planet.component';
 import {RouterModule} from '@angular/router';
 import {plantsAppRoutes} from './app.routes';
 import { PlanetVisitComponent } from './planet-visit/planet-visit.component';
+import { PlanetSampleFormComponent } from './planet-visit/planet-sample-form/planet-sample-form.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { TrendyInputComponent } from './planet-visit/planet-sample-form/trendy-input/trendy-input.component';
 
 @NgModule({
     declarations: [
@@ -21,12 +24,15 @@ import { PlanetVisitComponent } from './planet-visit/planet-visit.component';
         HeadquartersComponent,
         PlanetVotesComponent,
         PlanetComponent,
-        PlanetVisitComponent
+        PlanetVisitComponent,
+        PlanetSampleFormComponent,
+        TrendyInputComponent
     ],
-    imports: [
-        BrowserModule,
-        RouterModule.forRoot(plantsAppRoutes)
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(plantsAppRoutes),
+    ReactiveFormsModule
+  ],
     providers: [],
     bootstrap: [AppComponent]
 })
