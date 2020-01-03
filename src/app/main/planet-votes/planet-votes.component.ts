@@ -14,4 +14,7 @@ export class PlanetVotesComponent implements OnInit {
   ngOnInit() {
   }
 
+  plantClicked(planet: string) {
+    console.log(planet, 'clicked');
+  }
 }

@@ -1,6 +1,6 @@
 <h2 class="section-label">Next Targets</h2>
 
 <div class="planets-container">
-  <app-planet *ngFor="let planet of planets" [planetName]="planet|lowercase"></app-planet>
+  <app-planet (click)="plantClicked(planet)" *ngFor="let planet of planets" [planetName]="planet|lowercase"></app-planet>
 </div>
 
