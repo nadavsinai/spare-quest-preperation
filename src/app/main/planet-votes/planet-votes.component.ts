@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-planet-votes',
@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./planet-votes.component.scss']
 })
 export class PlanetVotesComponent implements OnInit {
+  planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
