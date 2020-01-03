@@ -1,0 +1,35 @@
+:host {
+  display: inline-block;
+  vertical-align: middle;
+  width: 200px;
+  margin: 20px 50px;
+  border-radius: 2px;
+  border: 1px solid #2570a7;
+  padding: 20px 10px;
+  background: rgba(12, 42, 64, 0.48);
+  color: white;
+}
+
+.planet-name {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 4px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.planet-image {
+  position: relative;
+  height: 175px;
+
+  img {
+    left: 50%; /*IE needs this*/
+    position: absolute;
+    transform: translateX(-50%);
+    height: 100%;
+  }
+}
+
+.planet-description {
+  text-align: left;
+}

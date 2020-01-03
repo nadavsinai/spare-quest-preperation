@@ -1,0 +1,92 @@
+
+#header {
+  height: 550px;
+  background-image: url("../../assets/images/header-space.png");
+  display: block;
+  background-position: center 60%;
+  background-size: cover;
+  position: relative;
+}
+
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  z-index: 1;
+  text-align: right;
+  transition: background 300ms ease-in-out;
+
+  &.visible-nav {
+    background: #07090b;
+  }
+}
+
+.nav-button {
+  padding: 10px 30px;
+  margin: 30px 20px;
+  outline: none;
+  background: transparent;
+  border: 1px solid rgba(0, 148, 255, 0.5);
+  color: white;
+  border-radius: 6px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: box-shadow 180ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 20px 5px #0094ff;
+  }
+
+  &:active {
+    color: #0094ff;
+  }
+}
+
+.call-to-action {
+  background: #0094ff;
+  color: white;
+  transition: all 180ms ease-in-out;
+
+  &:hover {
+    background: white;
+    color: #0094ff;
+  }
+
+  &:active {
+    background: white;
+    color: black;
+    transition: none;
+  }
+}
+
+.page-logo {
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  img {
+    height: 100%;
+  }
+}
+
+#slogan {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+  white-space: nowrap;
+  font-size: 100px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px #0094ff, 0 0 40px #0094ff;
+  transform: translate(-50%, -50%);
+}
+
