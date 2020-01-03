@@ -1,0 +1,8 @@
+<ng-container *ngIf="planet === 'Earth' else otherPlanets">
+  <app-headquarters></app-headquarters>
+</ng-container>
+<ng-template #otherPlanets>
+  <p> visiting {{planet}}</p>
+</ng-template>
+
+<button routerLink="/">Back</button>

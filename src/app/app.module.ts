@@ -10,6 +10,7 @@ import { PlanetVotesComponent } from './main/planet-votes/planet-votes.component
 import { PlanetComponent } from './main/planet-votes/planet/planet.component';
 import {RouterModule} from '@angular/router';
 import {plantsAppRoutes} from './app.routes';
+import { PlanetVisitComponent } from './planet-visit/planet-visit.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import {plantsAppRoutes} from './app.routes';
         FooterComponent,
         HeadquartersComponent,
         PlanetVotesComponent,
-        PlanetComponent
+        PlanetComponent,
+        PlanetVisitComponent
     ],
     imports: [
         BrowserModule,
