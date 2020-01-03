@@ -1,5 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
+
+function createNewSampleGroup() {
+  return new FormGroup({
+    position: new FormControl(''),
+    sampleLabel: new FormControl('')
+  });
+}
 
 @Component({
   selector: 'app-planet-sample-form',
@@ -7,10 +14,16 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./planet-sample-form.component.scss']
 })
 export class PlanetSampleFormComponent implements OnInit {
+  private samplesArray = new FormArray(
+    [createNewSampleGroup()]
+  );
+
   sampleForm = new FormGroup({
     astronautName: new FormControl(''),
-    date: new FormControl(new Date())
+    date: new FormControl(new Date()),
+    samples: this.samplesArray
   });
+
 
   constructor() {
   }
@@ -18,4 +31,15 @@ export class PlanetSampleFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit() {
+    console.log(this.sampleForm.value);
+  }
+
+  addSample() {
+    this.samplesArray.push(createNewSampleGroup());
+  }
+
+  removeSample(index: number) {
+      this.samplesArray.removeAt(index);
+  }
 }

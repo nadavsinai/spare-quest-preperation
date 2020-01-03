@@ -7,4 +7,25 @@
     <label for="date">Date:</label>
     <input id="date" type="date" formControlName="date" [value]="sampleForm.controls.date.value|date:'yyyy-MM-dd'" required>
   </app-trendy-input>
+  <section class="samples-wrapper">
+    <h5> Samples
+      <button class="nav-button" (click)="addSample()">+</button>
+    </h5>
+    <section formArrayName="samples">
+      <section  class="sample" *ngFor="let sample of sampleForm.controls.samples.controls; let index:index" [formGroup]="sample">
+        <button class="nav-button" (click)="removeSample(index)">-</button>
+        <div>
+          <app-trendy-input>
+            <label>Position:</label>
+            <input type="text" formControlName="position"/>
+          </app-trendy-input>
+          <app-trendy-input>
+            <label>Sample Label:</label>
+            <input type="text" formControlName="sampleLabel"/>
+          </app-trendy-input>
+        </div>
+      </section>
+    </section>
+  </section>
+  <button class="nav-button" [disabled]="sampleForm.invalid" (click)="submit()">Submit and return</button>
 </form>
