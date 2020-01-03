@@ -1,7 +1,10 @@
 <form [formGroup]="sampleForm">
   <app-trendy-input>
     <label for="name">Name:</label>
-    <input id="name" formControlName="astronautName" required>
+    <input id="name" type="text" formControlName="astronautName" required>
   </app-trendy-input>
-
+  <app-trendy-input>
+    <label for="date">Date:</label>
+    <input id="date" type="date" formControlName="date" [value]="sampleForm.controls.date.value|date:'yyyy-MM-dd'" required>
+  </app-trendy-input>
 </form>

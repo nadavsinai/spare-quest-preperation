@@ -8,7 +8,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class PlanetSampleFormComponent implements OnInit {
   sampleForm = new FormGroup({
-    astronautName: new FormControl('')
+    astronautName: new FormControl(''),
+    date: new FormControl(new Date())
   });
 
   constructor() {
