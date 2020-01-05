@@ -1,0 +1,14 @@
+{
+  "name": "@algotec/spaceship-parts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  }
+}
