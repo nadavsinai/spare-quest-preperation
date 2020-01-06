@@ -3,23 +3,23 @@ import {CommonModule} from '@angular/common';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import {HeadquartersComponent} from './headquarters/headquarters.component';
-import {PlanetVotesComponent} from './planet-votes/planet-votes.component';
-import {PlanetComponent} from './planet-votes/planet/planet.component';
+import {PlanetsViewComponent} from './planets-view/planets-view.component';
+import {PlanetComponent} from './planets-view/planet/planet.component';
 import {PlanetVisitComponent} from './planet-visit/planet-visit.component';
 import {PlanetSampleFormComponent} from './planet-visit/planet-sample-form/planet-sample-form.component';
 
 import {TrendyInputComponent} from './planet-visit/planet-sample-form/trendy-input/trendy-input.component';
 import {RouterModule} from '@angular/router';
-import {planetRoutes} from './planet.routes';
-import { StoreModule } from '@ngrx/store';
-import * as fromPlanets from './planets.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { PlanetsEffects } from './planets.effects';
+import {planetRoutes} from './common/planet.routes';
+import {StoreModule} from '@ngrx/store';
+import * as fromPlanets from './common/planets.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {PlanetsEffects} from './common/planets.effects';
 
 
 @NgModule({
   declarations: [HeadquartersComponent,
-    PlanetVotesComponent,
+    PlanetsViewComponent,
     PlanetComponent,
     PlanetVisitComponent,
     PlanetSampleFormComponent,

@@ -1,17 +1,22 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppComponent} from './app.component';
+import {AppComponent} from './common/app-component/app.component';
 import {HeaderComponent} from './header/header.component';
 
 import {RouterModule} from '@angular/router';
-import {plantsAppRoutes} from './app.routes';
+import {appRootRoutes} from './common/routes/app.routes';
 import {StoreModule} from '@ngrx/store';
-import {reducers, metaReducers} from './reducers';
+import {reducers, metaReducers} from './common/index';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {PlanetsModule} from './planets/planets.module';
+import {EffectsModule} from '@ngrx/effects';
+import {HttpClientModule} from '@angular/common/http';
+import {LocalstorageService, STORAGE} from './common/localstorage.service';
+import {AppRoutingModule} from './common/routes/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(plantsAppRoutes),
+    AppRoutingModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
@@ -30,9 +35,13 @@ import {NotFoundComponent} from './not-found/not-found.component';
       }
     }),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([]),
+    HttpClientModule,
+    PlanetsModule,
+    RouterModule.forChild([{path: "**", redirectTo: '404'}])
   ],
-  providers: [],
+  providers: [LocalstorageService, {provide: STORAGE, useValue: localStorage}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

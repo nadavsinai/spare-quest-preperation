@@ -1,0 +1,6 @@
+<h2 class="section-label">Next Targets</h2>
+
+<div class="planets-container">
+  <app-planet [routerLink]="['/planet',planet]" *ngFor="let planet of planets|async" [planetName]="planet|lowercase"></app-planet>
+</div>
+

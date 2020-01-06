@@ -1,7 +1,7 @@
 import {ActionReducerMap, MetaReducer} from '@ngrx/store';
 import {environment} from '../../environments/environment';
-import {balanceReducer} from './balance.state';
-import {SpaceAppState} from './app.state';
+import {balanceReducer} from './state/balance.state';
+import {SpaceAppState} from './state/app.state';
 
 
 export const reducers: ActionReducerMap<SpaceAppState> = {

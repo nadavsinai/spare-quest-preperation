@@ -2,8 +2,8 @@ import {Component, HostBinding, HostListener, OnInit} from '@angular/core';
 import {fromEvent} from 'rxjs';
 import {subscribeOn} from 'rxjs/operators';
 import {animationFrameScheduler} from 'rxjs';
-import {balanceSelector} from '../reducers/balance.state';
-import {SpaceAppState} from '../reducers/app.state';
+import {balanceSelector} from '../common/state/balance.state';
+import {SpaceAppState} from '../common/state/app.state';
 import {Store} from '@ngrx/store';
 
 

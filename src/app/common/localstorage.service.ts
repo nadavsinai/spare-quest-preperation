@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable, InjectionToken} from '@angular/core';
 import {BehaviorSubject, of} from 'rxjs';
 import {map} from 'rxjs/operators';
-
+export const STORAGE = new InjectionToken<Storage>('Storage');
 @Injectable()
 export class LocalstorageService {
   private localStorageSubject = new BehaviorSubject(this.localStore);
@@ -28,7 +28,7 @@ export class LocalstorageService {
     this.localStorageSubject.next(this.localStore)
   }
 
-  constructor(private localStore = localStorage) {
+  constructor(@Inject(STORAGE) private localStore) {
   }
 
 
