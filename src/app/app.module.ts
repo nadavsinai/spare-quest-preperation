@@ -17,6 +17,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {LocalstorageService, STORAGE} from './common/localstorage.service';
 import {AppRoutingModule} from './common/routes/app-routing.module';
+import {SpaceshipsModule} from './spaceships/spaceships.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {AppRoutingModule} from './common/routes/app-routing.module';
     EffectsModule.forRoot([]),
     HttpClientModule,
     PlanetsModule,
+    SpaceshipsModule,
     RouterModule.forChild([{path: "**", redirectTo: '404'}])
   ],
   providers: [LocalstorageService, {provide: STORAGE, useValue: localStorage}],

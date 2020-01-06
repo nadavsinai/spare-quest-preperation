@@ -15,6 +15,7 @@ import {StoreModule} from '@ngrx/store';
 import * as fromPlanets from './common/planets.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {PlanetsEffects} from './common/planets.effects';
+import { MyShipsComponent } from './my-ships/my-ships.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {PlanetsEffects} from './common/planets.effects';
     PlanetComponent,
     PlanetVisitComponent,
     PlanetSampleFormComponent,
-    TrendyInputComponent],
+    TrendyInputComponent,
+    MyShipsComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,

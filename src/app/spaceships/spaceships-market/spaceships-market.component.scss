@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  padding: 40px 10vw;
+}
+
+.list-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: self-end;
+  justify-content: space-evenly;
+}
+.choosable {
+  transition: all 0.5s;
+  &:hover {
+    border-color: #6aa562;
+  }
+  &.out-of-budget:hover, .out-of-budget &:hover {
+    border-color: #a54942;
+  }
+}
+.spaceship-box {
+  flex: 1 1 30%;
+  border: 2px solid lightcyan;
+  border-radius: 20px;
+  text-align: center;
+  margin: 0 15px;
+}
+
+.spaceship-image {
+  max-height: 165px;
+  border: 3px solid lightcyan;
+  border-radius: 20px;
+}

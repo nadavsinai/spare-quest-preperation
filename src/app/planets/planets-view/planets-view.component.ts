@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PlanetsService} from '../common/planets.service';
+import {SpaceAppState} from '../../common/state/app.state';
+import {Store} from '@ngrx/store';
+import {spaceShipsOwnedSelector} from '../../spaceships/state/spaceships.state';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-planet-votes',
@@ -8,14 +12,24 @@ import {PlanetsService} from '../common/planets.service';
 })
 export class PlanetsViewComponent implements OnInit {
   planets: Promise<string[]> = this.planetsService.getAll();
+  ships$ = this.store.select(spaceShipsOwnedSelector);
 
-  constructor(private planetsService:PlanetsService) {
+
+  onDrop($event, planet) {
+    $event.preventDefault();
+    let ship = $event.dataTransfer.getData("text");
+    console.log($event, planet, ship);
+    this.router.navigate(['planet', planet], {queryParams: {spaceShip: ship}});
+  };
+
+  constructor(private planetsService: PlanetsService, private store: Store<SpaceAppState>, private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  plantClicked(planet: string) {
-    console.log(planet, 'clicked');
+  onDragOver($event: DragEvent, planet: string) {
+    $event.preventDefault();
+    // console.log('dragOver',$event,planet);
   }
 }

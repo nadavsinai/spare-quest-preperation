@@ -1,6 +1,12 @@
-<h2 class="section-label">Next Targets</h2>
+<h2 class="section-label">Space Travels Overview</h2>
+<section class="travelbox">
 
-<div class="planets-container">
-  <app-planet [routerLink]="['/planet',planet]" *ngFor="let planet of planets|async" [planetName]="planet|lowercase"></app-planet>
-</div>
+  <div class="earth-container">
+    <app-my-ships [ships]="ships$|async"></app-my-ships>
+    <app-planet [routerLink]="['/planet','Earth']" planetName="earth"></app-planet>
+  </div>
+  <div class="planets-container">
+    <app-planet  (drop)="onDrop($event,planet)"  (dragover)="onDragOver($event,planet)" *ngFor="let planet of planets|async" [planetName]="planet|lowercase"></app-planet>
+  </div>
+</section>
 

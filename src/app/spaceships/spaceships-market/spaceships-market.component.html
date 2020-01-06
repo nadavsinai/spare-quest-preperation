@@ -1,0 +1,11 @@
+<h5>Available ships model</h5>
+<section class="list-wrapper">
+  <article *ngFor="let ship of ships | keyvalue" class="spaceship-box choosable" [class.out-of-budget]="!hasMoneyFor(ship.value.price)">
+    <p class="spaceship-label">{{ship.key}}</p>
+    <div class="spaceship-details">
+      <img class="spaceship-image choosable" [src]="'/assets/images/'+ship.key +'.jpg'"/>
+      <p class="spaceship-price">{{ship.value.price|currency:'USD':'symbol':'1.0-0'}}</p>
+      <button (click)="buyShip.emit(ship.value)" class="nav-button" [disabled]="!hasMoneyFor(ship.value.price)">Buy</button>
+    </div>
+  </article>
+</section>

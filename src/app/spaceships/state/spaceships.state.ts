@@ -1,18 +1,7 @@
-import {Action, ActionCreator, ActionType, createAction, createReducer, on, props} from '@ngrx/store';
-import {IEngine, IFuelSupply, ISpaceship} from '@algotec/spaceship-parts';
+import {Action, createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import {IEngine, IFuelSupply, ISpaceship} from 'js/ts/dist/index';
 import {Type} from '@angular/core';
-
-const createSpaceship = createAction('[spaceships] create spaceship', props<{ ship: ISpaceship }>());
-const spaceShipIdProps = props<{ shipId: number }>();
-
-const spaceshipLost = createAction('[spaceships] spaceship lost', spaceShipIdProps);
-const startShip = createAction('[spaceships] start spaceship', spaceShipIdProps);
-const startShipSuccess = createAction('[spaceships] start spaceship success', spaceShipIdProps);
-const startShipFailed = createAction('[spaceships] start spaceship fail', spaceShipIdProps);
-const stopShip = createAction('[spaceships] stop spaceship', spaceShipIdProps);
-const refuelSpaceship = createAction('[spaceships] refuel spaceship ', props<{ shipId: number }>());
-const assignShip = createAction('[spaceships] assign spaceship', props<{ shipId: number, destination: string }>());
-const unassignShip = createAction('[spaceships] remove spaceship assignment', props<{ shipId: number }>());
+import {assignShip, buySpaceship, createSpaceshipSuccess, refuelSpaceship, spaceshipLost, unassignShip} from './spaceship.actions';
 
 export interface ISpaceshipsState {
   ships: { [key: number]: ISpaceship };
@@ -65,7 +54,7 @@ const onUnassignShip = on(unassignShip, (state: ISpaceshipsState, action) => {
 );
 
 const spaceshipsInternalReducer = createReducer(spaceshipsInitialState,
-  on(createSpaceship, addShipReducer),
+  on(createSpaceshipSuccess, addShipReducer),
   on(spaceshipLost, (state, action) => {
     const {[action.shipId]: oldShips, ...otherShips} = state.ships;
     return {...state, ships: otherShips}
@@ -78,3 +67,7 @@ const spaceshipsInternalReducer = createReducer(spaceshipsInitialState,
 export function spaceShipReducer(state: ISpaceshipsState, action: Action) {
   return spaceshipsInternalReducer(state, action);
 }
+
+export const SPACESHIPS_FEATURE_NAME = 'spaceships';
+export const SpaceshipsStateSelector = createFeatureSelector<ISpaceshipsState>(SPACESHIPS_FEATURE_NAME);
+export const spaceShipsOwnedSelector = createSelector(SpaceshipsStateSelector, (state) => state.ships);

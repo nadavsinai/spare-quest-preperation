@@ -1,0 +1,4 @@
+<app-spaceships-wrapper>
+  <app-spaceships-market [ships]="shipsAvailable$|async" [currentBalance]="balance$|async" (buyShip)="buyShip($event)"></app-spaceships-market>
+
+</app-spaceships-wrapper>

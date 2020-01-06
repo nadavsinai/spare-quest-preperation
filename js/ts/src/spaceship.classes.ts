@@ -5,6 +5,7 @@ import {makeHyperDriveEngine, makeRocketWithLiquidFuel, makeRocketWithSolidFuel,
 export class OverWeightError extends Error {}
 
 export abstract class BaseSpaceShip implements ISpaceship {
+  abstract name:string;
   get currentLoad(): number {
     return this._currentLoad;
   }
@@ -32,6 +33,7 @@ export abstract class BaseSpaceShip implements ISpaceship {
 
 
 export class Appolo extends BaseSpaceShip implements ISpaceship {
+  readonly name = 'Appolo';
   static price = 100_000_000;
   static complexity = Complexity.LOW;
   readonly price = Appolo.price;
@@ -45,6 +47,7 @@ export class Appolo extends BaseSpaceShip implements ISpaceship {
 }
 
 export class Genesis extends BaseSpaceShip implements ISpaceship {
+  readonly name = 'Genesis';
   static price = 500_000_000;
   static complexity = Complexity.HIGH;
   readonly price = Genesis.price;
@@ -59,6 +62,7 @@ export class Genesis extends BaseSpaceShip implements ISpaceship {
 }
 
 export class Enterprise extends BaseSpaceShip implements ISpaceship {
+  readonly name = 'Enterprise';
   static price = 1_000_000_000;
   static complexity = Complexity.SUPER_HIGH;
   readonly price = Enterprise.price;

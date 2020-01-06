@@ -1,9 +1,9 @@
 
 #header {
-  height: 550px;
-  background-image: url("../../assets/images/header-space.png");
+  height: 300px;
   display: block;
-  background-position: center 60%;
+  background-position: center 66%;
+  background-image: url("../../assets/images/header-space.png");
   background-size: cover;
   position: relative;
   border-bottom: 7px solid teal;
@@ -55,14 +55,13 @@
 #slogan {
   position: absolute;
   left: 50%;
-  top: 50%;
-  font-family: 'Rajdhani', sans-serif;
+  top: 60%;
+  font-family: "Rajdhani", sans-serif;
   color: white;
   white-space: nowrap;
-  font-size: 100px;
+  font-size: 3vw;
   font-weight: 700;
   text-transform: uppercase;
   text-shadow: 0 0 20px #0094ff, 0 0 40px #0094ff;
   transform: translate(-50%, -50%);
 }
-

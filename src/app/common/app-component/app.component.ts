@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {SpaceAppState} from '../state/app.state';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor() {
+  constructor(store: Store<SpaceAppState>) {
+    if (!environment.production) {
+      store.subscribe(state => {
+        (window as any).AppState = state;
+      });
+    }
 
   }
 }

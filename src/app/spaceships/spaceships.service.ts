@@ -1,6 +1,6 @@
 import {Injectable, Type} from '@angular/core';
 import {Enterprise, Appolo, Genesis, ISpaceship, BaseSpaceShip} from "@algotec/spaceship-parts";
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 
 
@@ -8,7 +8,7 @@ import {delay} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SpaceshipsService {
-  ships = {Enterprise, Appolo, Genesis};
+  shipsAvailable$: Observable<{ [key: string]: Type<ISpaceship> }> = of({Enterprise, Appolo, Genesis});
 
   constructor() {
   }

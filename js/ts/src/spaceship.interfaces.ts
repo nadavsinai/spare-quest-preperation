@@ -17,8 +17,13 @@ export type HasComplexity = {
 
 export interface ISpaceship extends HasPrice, HasComplexity {
   readonly engine: IEngine;
+  readonly name: string;
   readonly maxLoad: Kilograms;
   currentLoad: Kilograms;
+}
+
+export interface SpaceShipFactory<T extends ISpaceship> extends HasPrice, HasComplexity {
+  new(engine?: IEngine): T
 }
 
 export type Dollars = number;
