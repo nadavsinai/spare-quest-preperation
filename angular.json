@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "jan19-web-course"
+    }
+  },
+  "defaultProject": "jan19-web-course",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

@@ -11,6 +11,10 @@ import {PlanetSampleFormComponent} from './planet-visit/planet-sample-form/plane
 import {TrendyInputComponent} from './planet-visit/planet-sample-form/trendy-input/trendy-input.component';
 import {RouterModule} from '@angular/router';
 import {planetRoutes} from './planet.routes';
+import { StoreModule } from '@ngrx/store';
+import * as fromPlanets from './planets.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { PlanetsEffects } from './planets.effects';
 
 
 @NgModule({
@@ -23,7 +27,9 @@ import {planetRoutes} from './planet.routes';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    RouterModule.forChild(planetRoutes)
+    RouterModule.forChild(planetRoutes),
+    StoreModule.forFeature(fromPlanets.planetsFeatureKey, fromPlanets.reducer),
+    EffectsModule.forFeature([PlanetsEffects])
   ]
 })
 export class PlanetsModule {}
