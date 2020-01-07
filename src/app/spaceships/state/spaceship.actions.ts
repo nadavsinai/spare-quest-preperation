@@ -1,10 +1,10 @@
 import {createAction, props} from '@ngrx/store';
 import {ISpaceship, SpaceShipFactory} from '@algotec/spaceship-parts';
 
-export const buySpaceship = createAction('[spaceships] buy spaceship', props<{ ship: SpaceShipFactory }>());
-export const createSpaceship = createAction('[spaceships] create spaceship', props<{ ship: SpaceShipFactory }>());
+export const buySpaceship = createAction('[spaceships] buy spaceship', props<{ ship: SpaceShipFactory<any> }>());
+export const createSpaceship = createAction('[spaceships] create spaceship', props<{ ship: SpaceShipFactory<any> }>());
 export const createSpaceshipSuccess = createAction('[spaceships] create spaceship success', props<{ ship: ISpaceship }>());
-export const createSpaceshipFailed = createAction('[spaceships] create spaceship fail', props<{ ship: SpaceShipFactory,error?:Error }>());
+export const createSpaceshipFailed = createAction('[spaceships] create spaceship fail', props<{ ship: SpaceShipFactory<any>,error?:Error }>());
 export const spaceShipIdProps = props<{ shipId: number }>();
 export const spaceshipLost = createAction('[spaceships] spaceship lost', spaceShipIdProps);
 export const startShip = createAction('[spaceships] start spaceship', spaceShipIdProps);

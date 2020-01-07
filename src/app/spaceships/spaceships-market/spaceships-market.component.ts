@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, Type} from '@angular/core';
-import {Dollars, ISpaceship} from '@algotec/spaceship-parts';
+import {Dollars, ISpaceship, SpaceShipFactory} from '@algotec/spaceship-parts';
 
 @Component({
   selector: 'app-spaceships-market',
@@ -8,9 +8,9 @@ import {Dollars, ISpaceship} from '@algotec/spaceship-parts';
   styleUrls: ['./spaceships-market.component.scss']
 })
 export class SpaceshipsMarketComponent implements OnInit {
-  @Input()  ships: { [key: string]: Type<ISpaceship> };
+  @Input()  ships: { [key: string]: SpaceShipFactory<any> };
   @Input() currentBalance :Dollars;
-  @Output() buyShip = new EventEmitter<Type<ISpaceship>>();
+  @Output() buyShip = new EventEmitter<SpaceShipFactory<any>>();
   constructor() {
   }
 

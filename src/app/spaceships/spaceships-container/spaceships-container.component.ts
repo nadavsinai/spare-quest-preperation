@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {SpaceshipsService} from '../spaceships.service';
 import {balanceSelector} from '../../common/state/balance.state';
-import { ISpaceship } from '@algotec/spaceship-parts';
+import {ISpaceship, SpaceShipFactory} from '@algotec/spaceship-parts';
 import {buySpaceship} from '../state/spaceship.actions';
 import {spaceShipsOwnedSelector} from '../state/spaceships.state';
 
@@ -22,7 +22,7 @@ export class SpaceshipsContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  buyShip(spaceship: ISpaceship) {
+  buyShip(spaceship: SpaceShipFactory<any>) {
     this.store.dispatch(buySpaceship({ship:spaceship}));
   }
 }
