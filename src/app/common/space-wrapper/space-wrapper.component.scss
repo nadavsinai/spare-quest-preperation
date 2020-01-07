@@ -1,0 +1,7 @@
+:host {
+  background: url("../../../assets/images/stars-repeating-teal.jpg") center top repeat;
+  display: block;
+  padding: 20px;
+  min-height: calc(100vh - 346px); // 300 px header + 6px border + 20*2 padding ,  doing this with SASS variables makes sense.
+
+}

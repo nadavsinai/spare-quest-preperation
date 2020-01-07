@@ -1,1 +1,30 @@
-["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+[
+  {
+    "name": "Mercury",
+    "distance": 0.61
+  },
+  {
+    "name": "Venus",
+    "distance": 0.28
+  },
+  {
+    "name": "Mars",
+    "distance": 0.52
+  },
+  {
+    "name": "Jupiter",
+    "distance": 4.2
+  },
+  {
+    "name": "Saturn",
+    "distance": 8.52
+  },
+  {
+    "name": "Uranus",
+    "distance": 18.21
+  },
+  {
+    "name": "Neptune",
+    "distance": 29.09
+  }
+]

@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {ISpaceship} from '@algotec/spaceship-parts';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SpaceshipsService} from '../../spaceships/spaceships.service';
-import {planetRouteData, shipRouteData} from '../common/common.types';
+import {destinationPlanetRouteData, shipRouteData} from '../common/common.types';
 import {SpaceshipImageComponent} from '../spaceship-image/spaceship-image.component';
 import {SpaceshipBoxComponent} from '../spaceship-box/spaceship-box.component';
 
@@ -19,11 +19,13 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
   private destinationLeft: number;
   private currentLeft: number;
   private shipID: number;
+  private from: string;
 
   constructor(private activatedRoute: ActivatedRoute, private spaceshipsSvc: SpaceshipsService, private router: Router) {
     this.shipID = this.activatedRoute.snapshot.params[shipRouteData];
     this.ship = this.spaceshipsSvc.myShips[this.shipID]; // could be get from store by selector
-    this.destination = this.activatedRoute.snapshot.params[planetRouteData];
+    this.from = this.activatedRoute.snapshot.params[destinationPlanetRouteData];
+    this.destination = this.activatedRoute.snapshot.params[destinationPlanetRouteData];
   }
 
   ngOnInit() {

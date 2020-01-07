@@ -1,10 +1,18 @@
-:host{
+:host {
   display: flex;
-  color:white;
+  color: white;
   font-family: 'Rajdhani', sans-serif;
 }
-.sample {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+
+.blink {
+  animation: blink .75s linear infinite;
+}
+
+.warning {
+  color: red;
+  text-transform: uppercase;
+}
+
+.small-text {
+  font-size: 12px;
 }

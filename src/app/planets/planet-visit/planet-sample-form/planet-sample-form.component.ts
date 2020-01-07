@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormArray, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {IPlanetForm} from '../../common/common.types';
 
 function createNewSampleGroup() {
   return new FormGroup({
@@ -7,6 +8,20 @@ function createNewSampleGroup() {
     sampleLabel: new FormControl('', {validators: [Validators.required, Validators.minLength(3)]}),
     weight: new FormControl('',)
   });
+}
+
+function getLoad(control: FormArray) {
+  return control.controls.reduce((acc, sample: FormGroup) => {
+    acc = acc + parseFloat(sample.get('weight').value);
+    return acc;
+  }, 0);
+}
+
+function maxWeightValidator(maxLoad: number): ValidatorFn {
+  return (control: FormArray) => {
+    const load = getLoad(control);
+    return (load > maxLoad) ? {maxWeight: 'overWeight!!'} : null;
+  }
 }
 
 @Component({
@@ -18,25 +33,32 @@ export class PlanetSampleFormComponent implements OnInit {
 
   @Input() maxLoad: number;
 
-  private samplesArray = new FormArray(
-    [createNewSampleGroup()]
-  );
-
-  sampleForm = new FormGroup({
-    astronautName: new FormControl(''),
-    date: new FormControl(new Date()),
-    samples: this.samplesArray
-  });
-
+  @Output() weightChanged = new EventEmitter<number>();
+  @Output() planetFormSubmit = new EventEmitter<IPlanetForm>();
+  private samplesArray;
+  private sampleForm: FormGroup;
 
   constructor() {
   }
 
   ngOnInit() {
+
+    this.samplesArray = new FormArray(
+      [createNewSampleGroup()], [maxWeightValidator(this.maxLoad)]
+    );
+
+    this.sampleForm = new FormGroup({
+      astronautName: new FormControl(''),
+      date: new FormControl(new Date()),
+      samples: this.samplesArray
+    });
+
+
   }
 
   submit() {
     console.log(this.sampleForm.value);
+    this.planetFormSubmit.emit(this.sampleForm.value);
   }
 
   addSample() {
@@ -45,9 +67,15 @@ export class PlanetSampleFormComponent implements OnInit {
 
   removeSample(index: number) {
     this.samplesArray.removeAt(index);
+    const currentWeight = getLoad(this.sampleForm.get('samples') as FormArray);
+    if (!isNaN(currentWeight)) {
+      this.weightChanged.emit(currentWeight);
+    }
   }
 
-  getWeight(sample: FormControl) {
-    sample.setValue(Math.random() * 50);
+  getWeight(sample: FormGroup) {
+    let number = Math.random() * 100;
+    sample.patchValue({weight: number.toFixed(2)});
+    this.weightChanged.emit(getLoad(sample.parent as FormArray));
   }
 }

@@ -35,7 +35,7 @@ export type Octane = number;
 export interface IEngine extends HasPrice, HasComplexity {
   readonly maxSpeed: number;
   readonly fuelSupply: IFuelSupply;
-
+  started:boolean;
 
   start(): Promise<void>;
 

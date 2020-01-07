@@ -44,7 +44,7 @@ SolidFuelSupply.prototype.pump = function pump(startCb: StartCallback) {
     startCb(null, stopCb);
   });
   const consumptionInterval = setInterval(() => {
-    if (this.isPumping) {
+    if (privateMap.get(this).isPumping) {
       if (this.fuelLeft > this.flow) {
         privateMap.get(this).fuelLeft -= this.flow;
       } else {

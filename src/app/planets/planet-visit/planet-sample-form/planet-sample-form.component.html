@@ -2,6 +2,8 @@
   <app-trendy-input>
     <label for="name">Name:</label>
     <input id="name" type="text" formControlName="astronautName" required>
+    <span class="warning small-text"
+          *ngIf="sampleForm.controls.astronautName.touched && sampleForm.hasError('required','astronautName')">Name must be entered</span>
   </app-trendy-input>
   <app-trendy-input>
     <label for="date">Date:</label>
@@ -9,24 +11,34 @@
   </app-trendy-input>
   <section class="samples-wrapper">
     <h5> Samples
-      <button class="nav-button" (click)="addSample()">+</button>
+      <p class="warning blink" *ngIf="sampleForm.hasError('maxWeight','samples')">Samples overweight!!</p>
+      <button class="nav-button small" (click)="addSample()">+</button>
     </h5>
     <section formArrayName="samples">
-      <section class="sample" *ngFor="let sample of sampleForm.controls.samples.controls; let index:index" [formGroup]="sample">
-        <button class="nav-button" (click)="removeSample(index)">-</button>
+      <section class="sample" *ngFor="let sample of sampleForm.controls.samples.controls; index as index ; first as isFirst" [formGroup]="sample">
+        <ng-container *ngIf="!isFirst">
+          <button class="nav-button small" (click)="removeSample(index)">-</button>
+          <span class="small-text">drop sample</span>
+        </ng-container>
         <div>
           <app-trendy-input>
             <label>Position:</label>
             <input type="text" formControlName="position"/>
+            <span class="warning small-text"
+                  *ngIf="sample.controls.position.touched && sample.hasError('required','position')">Cords must be entered</span>
+            <span class="warning small-text" *ngIf="sample.controls.position.touched && sample.hasError('pattern','position')">Cords must be entered in format lat,lang</span>
           </app-trendy-input>
           <app-trendy-input>
             <label>Sample Label:</label>
             <input type="text" formControlName="sampleLabel"/>
+            <span class="warning small-text" *ngIf="sample.controls.sampleLabel.touched && sample.hasError('required','sampleLabel')">Label must be entered</span>
+            <span class="warning small-text" *ngIf="sample.controls.sampleLabel.touched && sample.hasError('minlength','sampleLabel')">Label must be at least {{sample.getError('minlength', 'sampleLabel').requiredLength}}
+              letters long</span>
           </app-trendy-input>
           <app-trendy-input>
             <label>weight </label>
-            <button class="weighBtn" (click)="getWeight(sample)">Weigh Sample</button>
-            <input type="text" readonly foformControlName="weight"/>
+            <button class="weighBtn" *ngIf="!sample.get('weight').value" (click)="getWeight(sample)">Weigh Sample</button>
+            <input type="text" readonly formControlName="weight"/>
           </app-trendy-input>
         </div>
       </section>

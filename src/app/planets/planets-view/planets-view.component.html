@@ -6,7 +6,11 @@
     <app-planet [routerLink]="['/planet','Earth']" planetName="earth"></app-planet>
   </div>
   <div class="planets-container">
-    <app-planet  (drop)="onDrop($event,planet)"  (dragover)="onDragOver($event,planet)" *ngFor="let planet of planets|async" [planetName]="planet|lowercase"></app-planet>
+    <app-planet (drop)="onDrop($event,planet.name)" (dragover)="onDragOver($event,planet.name)" *ngFor="let planet of planets|async"
+                [planetName]="planet.name|lowercase">
+      <small>{{planetsService.getStatsForPlanet(planet.name)}} samples</small>
+    </app-planet>
+
   </div>
 </section>
 
