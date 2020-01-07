@@ -4,10 +4,12 @@
   width: 120px;
   margin: 20px 20px;
   border-radius: 2px;
-  border: 1px solid #2570a7;
   padding: 20px 10px;
-  background: rgba(12, 42, 64, 0.48);
-  color: white;
+
+  &.showBox {
+    border: 1px solid #2570a7;
+    background: rgba(12, 42, 64, 0.48);
+  }
 }
 
 .planet-name {

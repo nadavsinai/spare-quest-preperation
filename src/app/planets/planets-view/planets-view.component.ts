@@ -19,7 +19,7 @@ export class PlanetsViewComponent implements OnInit {
     $event.preventDefault();
     let ship = $event.dataTransfer.getData("text");
     console.log($event, planet, ship);
-    this.router.navigate(['planet', planet], {queryParams: {spaceShip: ship}});
+    this.router.navigate(['journey',ship,'to', planet], {queryParams: {spaceShip: ship.name}});
   };
 
   constructor(private planetsService: PlanetsService, private store: Store<SpaceAppState>, private router: Router) {

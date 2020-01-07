@@ -1,5 +1,5 @@
-<div class="planet-image">
-  <img [src]="'../../../assets/svgs/' + planetName + '.svg'" [alt]="planetName">
+<div class="planet-image" [class.withBox]="showBox">
+  <img [src]="'../../../assets/svgs/' + planetName.toLowerCase() + '.svg'" [alt]="planetName">
 </div>
 
 <h2 class="planet-name">{{planetName}}</h2>

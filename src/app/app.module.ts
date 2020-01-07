@@ -17,12 +17,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {LocalstorageService, STORAGE} from './common/localstorage.service';
 import {AppRoutingModule} from './common/routes/app-routing.module';
 import {SpaceshipsModule} from './spaceships/spaceships.module';
+import { SpaceWrapperComponent } from './common/space-wrapper/space-wrapper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     NotFoundComponent,
+    SpaceWrapperComponent,
   ],
   imports: [
     BrowserModule,

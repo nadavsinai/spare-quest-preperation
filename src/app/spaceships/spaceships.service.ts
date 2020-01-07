@@ -9,6 +9,7 @@ import {delay} from 'rxjs/operators';
 })
 export class SpaceshipsService {
   shipsAvailable$: Observable<{ [key: string]: SpaceShipFactory<any> }> = of({Enterprise, Appolo, Genesis});
+  myShips: ISpaceship[] = [new Appolo()];
 
   constructor() {
   }
@@ -16,6 +17,10 @@ export class SpaceshipsService {
   constructSpaceShip<T extends ISpaceship>(spaceship: SpaceShipFactory<T>): Promise<T> {
     const ship = new spaceship();
     const complexity = ship.complexity + ship.engine.complexity;
-    return of(ship).pipe(delay(complexity * 2000)).toPromise();
+    return of<T>(ship).pipe(delay(complexity * 2000)).toPromise()
+      .then((ship) => {
+        this.myShips.push(ship as ISpaceship);
+        return ship;
+      });
   }
 }

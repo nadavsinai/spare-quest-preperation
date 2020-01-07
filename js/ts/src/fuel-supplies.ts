@@ -34,6 +34,7 @@ SolidFuelSupply.prototype.pump = function pump(startCb: StartCallback) {
   // prepare the stopCallback
   const stopCb: StopCallback = function stopCallback() {
     privateMap.get(this).isPumping = false;
+    clearInterval(consumptionInterval);
     return null;
   }.bind(this);
 
@@ -43,16 +44,17 @@ SolidFuelSupply.prototype.pump = function pump(startCb: StartCallback) {
     startCb(null, stopCb);
   });
   const consumptionInterval = setInterval(() => {
-    if (this.fuelLeft > this.flow) {
-      privateMap.get(this).fuelLeft -= this.flow;
-    } else {
-      this.isPumping = false;
-      clearInterval(consumptionInterval); // stop the interval;
-      this.onFuelEnd.forEach(function (v: Function) {
-        v();
-      });
+    if (this.isPumping) {
+      if (this.fuelLeft > this.flow) {
+        privateMap.get(this).fuelLeft -= this.flow;
+      } else {
+        this.isPumping = false;
+        clearInterval(consumptionInterval); // stop the interval;
+        this.onFuelEnd.forEach(function (v: Function) {
+          v();
+        });
+      }
     }
-
   }, 1000);
   privateMap.get(this).consumptionInterval = consumptionInterval;
 
@@ -78,6 +80,7 @@ export class LiquidNitrogenFuelSupply implements IFuelSupply {
     this.isPumping = true;
     const stopCb: StopCallback = () => {
       this.isPumping = false;
+      clearInterval(this.consumptionInterval);
       return null;
     };
 
@@ -86,14 +89,15 @@ export class LiquidNitrogenFuelSupply implements IFuelSupply {
     });
     // keep this timers
     this.consumptionInterval = setInterval(() => {
-      if (this.fuelLeft > this.flow) {
-        this._fuelLeft -= this.flow;
-      } else {
-        this.isPumping = false;
-        clearInterval(this.consumptionInterval); // stop the interval;
-        this.onFuelEnd.forEach((v) => v());
+      if (this.isPumping) {
+        if (this.fuelLeft > this.flow) {
+          this._fuelLeft -= this.flow;
+        } else {
+          this.isPumping = false;
+          clearInterval(this.consumptionInterval); // stop the interval;
+          this.onFuelEnd.forEach((v) => v());
+        }
       }
-
     }, 1000);
 
   }

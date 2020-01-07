@@ -3,7 +3,7 @@ import {Complexity, Dollars, IEngine, IFuelSupply, Liters, StopCallback} from '.
 export abstract class BaseEngine implements IEngine {
   abstract complexity: Complexity;
   private stopFuelSupply: StopCallback | null = null;
-
+  public started: boolean = false;
   readonly maxSpeed: number;
   readonly price: Dollars;
 
@@ -15,6 +15,7 @@ export abstract class BaseEngine implements IEngine {
       const pumpStartedCb = (err: Error | null, stopCb: StopCallback) => {
         this.stopFuelSupply = stopCb;
         if (!err) {
+          this.started = true;
           resolve();
         } else {
           reject(err);
@@ -29,6 +30,7 @@ export abstract class BaseEngine implements IEngine {
       if (this.stopFuelSupply) {
         const stopErr = this.stopFuelSupply();
         if (stopErr == null) {
+          this.started = false;
           return resolve();
         }
       }

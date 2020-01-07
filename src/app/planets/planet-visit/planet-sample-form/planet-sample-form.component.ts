@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 
 function createNewSampleGroup() {
   return new FormGroup({
-    position: new FormControl(''),
-    sampleLabel: new FormControl('')
+    position: new FormControl('', {validators: [Validators.required, Validators.pattern(/\d+,\d+/)]}),
+    sampleLabel: new FormControl('', {validators: [Validators.required, Validators.minLength(3)]}),
+    weight: new FormControl('',)
   });
 }
 
@@ -14,6 +15,9 @@ function createNewSampleGroup() {
   styleUrls: ['./planet-sample-form.component.scss']
 })
 export class PlanetSampleFormComponent implements OnInit {
+
+  @Input() maxLoad: number;
+
   private samplesArray = new FormArray(
     [createNewSampleGroup()]
   );
@@ -40,6 +44,10 @@ export class PlanetSampleFormComponent implements OnInit {
   }
 
   removeSample(index: number) {
-      this.samplesArray.removeAt(index);
+    this.samplesArray.removeAt(index);
+  }
+
+  getWeight(sample: FormControl) {
+    sample.setValue(Math.random() * 50);
   }
 }

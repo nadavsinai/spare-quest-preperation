@@ -16,6 +16,9 @@ import * as fromPlanets from './common/planets.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {PlanetsEffects} from './common/planets.effects';
 import { MyShipsComponent } from './my-ships/my-ships.component';
+import { PlanetJourneyComponent } from './planet-journey/planet-journey.component';
+import { SpaceshipImageComponent } from './spaceship-image/spaceship-image.component';
+import { SpaceshipBoxComponent } from './spaceship-box/spaceship-box.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { MyShipsComponent } from './my-ships/my-ships.component';
     PlanetVisitComponent,
     PlanetSampleFormComponent,
     TrendyInputComponent,
-    MyShipsComponent],
+    MyShipsComponent,
+    PlanetJourneyComponent,
+    SpaceshipImageComponent,
+    SpaceshipBoxComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,

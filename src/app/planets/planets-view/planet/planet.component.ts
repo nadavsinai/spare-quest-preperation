@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PlanetComponent implements OnInit {
   @Input() planetName: string;
-
+  @Input() showBox: boolean = true;
   constructor() { }
 
   ngOnInit() {

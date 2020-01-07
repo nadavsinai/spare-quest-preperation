@@ -21,8 +21,4 @@ export class MyShipsComponent implements OnInit {
 
   }
 
-  getImageFor(key: string) {
-    const ship: ISpaceship = this.ships[key];
-    return `/assets/images/${ship.name.toLowerCase()}.png`
-  }
 }

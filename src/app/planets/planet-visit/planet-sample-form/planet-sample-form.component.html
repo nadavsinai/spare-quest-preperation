@@ -12,20 +12,25 @@
       <button class="nav-button" (click)="addSample()">+</button>
     </h5>
     <section formArrayName="samples">
-      <section  class="sample" *ngFor="let sample of sampleForm.controls.samples.controls; let index:index" [formGroup]="sample">
+      <section class="sample" *ngFor="let sample of sampleForm.controls.samples.controls; let index:index" [formGroup]="sample">
         <button class="nav-button" (click)="removeSample(index)">-</button>
         <div>
           <app-trendy-input>
             <label>Position:</label>
-            <input type="text" required formControlName="position"/>
+            <input type="text" formControlName="position"/>
           </app-trendy-input>
           <app-trendy-input>
             <label>Sample Label:</label>
-            <input type="text" required minlength="3" formControlName="sampleLabel"/>
+            <input type="text" formControlName="sampleLabel"/>
+          </app-trendy-input>
+          <app-trendy-input>
+            <label>weight </label>
+            <button class="weighBtn" (click)="getWeight(sample)">Weigh Sample</button>
+            <input type="text" readonly foformControlName="weight"/>
           </app-trendy-input>
         </div>
       </section>
     </section>
   </section>
-  <button class="nav-button" [disabled]="sampleForm.invalid" (click)="submit()">Submit and return</button>
+  <button class="nav-button" [disabled]="sampleForm.invalid" (click)="submit()">Submit and return home</button>
 </form>

@@ -1,11 +1,24 @@
-:host{
-  background: url("../../../assets/images/stars-repeating-teal.jpg") center top repeat;
+:host {
   display: block;
-  padding: 20px;
+}
+
+p {
+  text-align: center;
+  margin: 0;
+  font-size: 17px;
+
 }
 
 .planet-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+app-planet-sample-form {
+  flex: 1 1 50vw;
+}
+
+app-planet {
+  flex: 1 1 auto;
 }

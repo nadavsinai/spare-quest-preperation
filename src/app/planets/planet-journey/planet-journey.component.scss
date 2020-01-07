@@ -1,0 +1,12 @@
+.stage {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.spaceship-box{
+  position: absolute;
+  left:150px;
+  top:20px;
+  z-index: 2;
+}

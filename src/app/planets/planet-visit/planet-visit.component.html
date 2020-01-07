@@ -2,11 +2,10 @@
   <app-headquarters></app-headquarters>
 </ng-container>
 <ng-template #otherPlanets>
-  <h2 class="section-label"> Visiting {{planet}}</h2>
+  <h2 class="section-label"> Spaceship {{ship.name}} on {{planet}}</h2>
+  <p>Load {{ship.currentLoad}} / {{ship.maxLoad}}</p>
   <section class="planet-wrapper">
     <app-planet [planetName]="planet|lowercase"></app-planet>
-    <app-planet-sample-form></app-planet-sample-form>
+    <app-planet-sample-form [maxLoad]="ship.maxLoad"></app-planet-sample-form>
   </section>
 </ng-template>
-
-<button class="nav-button" routerLink="/">Back</button>
