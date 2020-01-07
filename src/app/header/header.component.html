@@ -3,8 +3,8 @@
     <img src="../../assets/svgs/space-force-logo-v2.svg" alt="logo">
   </div>
 
-  <button class="nav-button" routerLink="/planets">Planets</button>
-  <button class="nav-button call-to-action" routerLink="/spaceships">Spaceships</button>
+  <button class="nav-button" routerLinkActive="call-to-action" routerLink="/planets">Planets</button>
+  <button class="nav-button" routerLinkActive="call-to-action" routerLink="/spaceships">Spaceships</button>
   <button class="nav-button">{{currentBalance$|async|currency:'USD':'symbol':'1.0-0'}}</button>
 </nav>
 
