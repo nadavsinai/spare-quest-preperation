@@ -21,9 +21,13 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
   private shipID: number;
   private from: string;
 
+  get journeyComplete() {
+    return this.currentLeft === this.destinationLeft;
+  }
+
   constructor(private activatedRoute: ActivatedRoute, private spaceshipsSvc: SpaceshipsService, private router: Router) {
     this.shipID = this.activatedRoute.snapshot.params[shipRouteData];
-    this.ship = this.spaceshipsSvc.myShips[this.shipID]; // could be get from store by selector
+    this.ship = this.activatedRoute.snapshot.data.ship; // using resolver
     this.from = this.activatedRoute.snapshot.params[destinationPlanetRouteData];
     this.destination = this.activatedRoute.snapshot.params[destinationPlanetRouteData];
   }
@@ -56,8 +60,10 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private destinationReached() {
-    this.router.navigate(['planet', this.destination], {queryParams: {ship: this.shipID}})
+  private async destinationReached() {
+    this.currentLeft = this.destinationLeft;
+    await this.ship.engine.stop();
+    await this.router.navigate(['planet', this.destination], {queryParams: {ship: this.shipID}});
   }
 
   shutDown() {

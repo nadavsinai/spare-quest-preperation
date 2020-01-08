@@ -18,6 +18,7 @@ import {LocalstorageService, STORAGE} from './common/localstorage.service';
 import {AppRoutingModule} from './common/routes/app-routing.module';
 import {SpaceshipsModule} from './spaceships/spaceships.module';
 import { SpaceWrapperComponent } from './common/space-wrapper/space-wrapper.component';
+import {NotificationsModule} from './notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,8 @@ import { SpaceWrapperComponent } from './common/space-wrapper/space-wrapper.comp
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
+        strictStateImmutability: false,
+        strictActionImmutability: false
       }
     }),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
@@ -41,6 +42,7 @@ import { SpaceWrapperComponent } from './common/space-wrapper/space-wrapper.comp
     EffectsModule.forRoot([]),
     HttpClientModule,
     PlanetsModule,
+    NotificationsModule,
     SpaceshipsModule,
     RouterModule.forChild([{path: "**", redirectTo: '404'}])
   ],

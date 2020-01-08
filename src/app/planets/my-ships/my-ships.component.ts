@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ISpaceship} from '@algotec/spaceship-parts';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-my-ships',
@@ -16,9 +17,18 @@ export class MyShipsComponent implements OnInit {
   }
 
   spaceShipDragStart($event: DragEvent, shipId: string) {
+
     $event.dataTransfer.dropEffect = "move";
     $event.dataTransfer.setData("text/plain", shipId);
+    requestAnimationFrame(() => {
+      ($event.target as HTMLElement).hidden = true;
+    });
 
   }
 
+  spaceShipDragEnd($event: DragEvent) {
+    requestAnimationFrame(() => {
+      ($event.target as HTMLElement).hidden = false;
+    });
+  }
 }

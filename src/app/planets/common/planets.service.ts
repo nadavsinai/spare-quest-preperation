@@ -25,7 +25,7 @@ export class PlanetsService {
     } else {
       this.spaceSamples[planet].push(sample);
     }
-    const reward = getLoad(sample.samples, (sample) => sample.weight) * 10000;
+    const reward = getLoad(sample.samples, (sample) => sample.weight) * 50000;
     this.store.dispatch(new DepositAction(reward));
 
   }

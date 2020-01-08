@@ -14,13 +14,19 @@ import {IPlanetData} from '../common/common.types';
 export class PlanetsViewComponent implements OnInit {
   planets: Promise<IPlanetData[]> = this.planetsService.getAll();
   ships$ = this.store.select(spaceShipsOwnedSelector);
+  boxOnPlanet: string;
 
-
-  onDrop($event:DragEvent, planet:string) {
+  onDrop($event: DragEvent, planet: string) {
     $event.preventDefault();
     let ship = $event.dataTransfer.getData("text");
     console.log($event, planet, ship);
-    this.router.navigate(['journey', ship, 'from', 'Earth', 'to', planet]);
+    this.router.navigate(['journey', ship, 'from', 'Earth', 'to', planet])
+      .then(() => {
+        console.log('resolved',arguments)
+      })
+    .catch(()=>{
+      console.log('rejected')
+    });
   };
 
   constructor(private planetsService: PlanetsService, private store: Store<SpaceAppState>, private router: Router) {
@@ -31,6 +37,13 @@ export class PlanetsViewComponent implements OnInit {
 
   onDragOver($event: DragEvent, planet: string) {
     $event.preventDefault();
-    // console.log('dragOver',$event,planet);
+    this.boxOnPlanet = planet;
+  }
+
+  onDragLeave($event: DragEvent, planet: string) {
+    $event.preventDefault();
+    requestAnimationFrame(() => {
+      this.boxOnPlanet = '';
+    })
   }
 }

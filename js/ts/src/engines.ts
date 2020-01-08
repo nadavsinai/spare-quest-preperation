@@ -2,7 +2,7 @@ import {Complexity, Dollars, IEngine, IFuelSupply, Liters, StopCallback} from '.
 
 export abstract class BaseEngine implements IEngine {
   abstract complexity: Complexity;
-  private stopFuelSupply: StopCallback | null = null;
+  private stopFuelSupply: StopCallback;
   public started: boolean = false;
   readonly maxSpeed: number;
   readonly price: Dollars;

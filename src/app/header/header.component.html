@@ -2,7 +2,7 @@
   <div class="page-logo">
     <img src="../../assets/svgs/space-force-logo-v2.svg" alt="logo">
   </div>
-
+  <app-notifications>  </app-notifications>
   <button class="nav-button" routerLinkActive="call-to-action" routerLink="/planets">Planets</button>
   <button class="nav-button" routerLinkActive="call-to-action" routerLink="/spaceships">Spaceships</button>
   <button class="nav-button">{{currentBalance$|async|currency:'USD':'symbol':'1.0-0'}}</button>

@@ -2,10 +2,11 @@ import {Action, createFeatureSelector, createReducer, createSelector, on} from '
 import {IEngine, IFuelSupply, ISpaceship} from 'js/ts/dist/index';
 import {Type} from '@angular/core';
 import {assignShip, buySpaceship, createSpaceshipSuccess, refuelSpaceship, spaceshipLost, unassignShip} from './spaceship.actions';
+import {ShipWithPosition} from '../../planets/common/common.types';
 
 export interface ISpaceshipsState {
   ships: { [key: number]: ISpaceship };
-  assignments: { [key: number]: { onMissionTo: string, startTime: number } }
+  assignments: { [key: number]: Omit<ShipWithPosition, 'ship'> }
 }
 
 const spaceshipsInitialState: ISpaceshipsState = {
@@ -40,7 +41,7 @@ const onRefuelShip = on(refuelSpaceship, (state: ISpaceshipsState, action) => {
 });
 const onAssignShip = on(assignShip, (state: ISpaceshipsState, action) => {
   if (!state.assignments[action.shipId]) {
-    state = {...state, assignments: {...state.assignments, [action.shipId]: {onMissionTo: action.destination, startTime: Date.now()}}}
+    state = {...state, assignments: {...state.assignments, [action.shipId]: {anchorPlanet: action.destination, move: {x: 0, y: 0}}}}
   }
   return state;
 });

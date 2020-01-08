@@ -18,7 +18,7 @@ export class PlanetVisitComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private shipSvc: SpaceshipsService, private planetsService: PlanetsService, private router: Router) {
     this.planet = this.activatedRoute.snapshot.params[destinationPlanetRouteData];
-    this.ship = this.shipSvc.myShips[this.activatedRoute.snapshot.queryParams[shipRouteData]];
+    this.ship = this.shipSvc.getShip(this.activatedRoute.snapshot.queryParams[shipRouteData]);
     this.currentWeight = this.ship.currentLoad;
   }
 

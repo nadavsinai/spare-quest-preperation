@@ -5,7 +5,7 @@
   <h2 class="section-label"> Spaceship {{ship.name}} on {{planet}}</h2>
   <p [ngStyle]="{'color':getWeightColor()}">Load {{currentWeight|number:'1.0-2'}} / {{ship.maxLoad}}</p>
   <section class="planet-wrapper">
-    <app-planet [planetName]="planet|lowercase"></app-planet>
+    <app-planet [showBox]="false" [planetName]="planet|lowercase"></app-planet>
     <app-planet-sample-form (planetFormSubmit)="onSubmitForm($event)" (weightChanged)="updateWeight($event)" [maxLoad]="ship.maxLoad"></app-planet-sample-form>
   </section>
 </ng-template>

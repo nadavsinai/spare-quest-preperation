@@ -1,11 +1,11 @@
 <section class="stage">
-  <app-planet planetName="earth"></app-planet>
+  <app-planet [showBox]="false" planetName="earth"></app-planet>
   <section class="spaceship-box">
     <app-spaceship-image  [ship]="ship?.name"></app-spaceship-image>
     <button class="nav-button" *ngIf="!ship.engine.started" (click)="takeOff()">TakeOFF</button>
     <button class="nav-button" *ngIf="ship.engine.started" (click)="shutDown()">ShutDown</button>
   </section>
-  <app-planet #targetPlanet [planetName]="destination"></app-planet>
+  <app-planet [showBox]="false" #targetPlanet [planetName]="destination"></app-planet>
 </section>
 <section>
   <p>Fuel level {{ship.engine.fuelSupply.fuelLeft}}</p>

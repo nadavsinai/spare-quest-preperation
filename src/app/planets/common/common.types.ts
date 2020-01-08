@@ -1,3 +1,5 @@
+import { ISpaceship } from '@algotec/spaceship-parts';
+
 export const destinationPlanetRouteData = 'toPlanetName';
 export const fromPlanetRouteData = 'fromPlanetName';
 export const shipRouteData = 'ship';
@@ -18,4 +20,13 @@ export interface IPlanetForm {
   astronautName: string;
   date: Date;
   samples: ISamples[]
+}
+export interface  Cords {
+  x:number;
+  y:number;
+}
+export interface ShipWithPosition {
+  ship:ISpaceship,
+  anchorPlanet:string;
+  move:Cords;
 }

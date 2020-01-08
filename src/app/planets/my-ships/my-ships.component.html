@@ -1,5 +1,5 @@
 <section class="wrapper">
   <div *ngFor="let ship of ships|keyvalue" class="spaceship-box">
-    <app-spaceship-image [ship]="ship.value.name" draggable="true" (dragstart)="spaceShipDragStart($event,ship.key.toString())"></app-spaceship-image>
+    <app-spaceship-image [ship]="ship.value.name" draggable="true" (dragend)="spaceShipDragEnd($event)"  (dragstart)="spaceShipDragStart($event,ship.key.toString())"></app-spaceship-image>
   </div>
 </section>
