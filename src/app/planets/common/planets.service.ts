@@ -25,7 +25,8 @@ export class PlanetsService {
     } else {
       this.spaceSamples[planet].push(sample);
     }
-    this.store.dispatch(new DepositAction(100_000_000));
+    const reward = getLoad(sample.samples, (sample) => sample.weight) * 10000;
+    this.store.dispatch(new DepositAction(reward));
 
   }
 
@@ -35,4 +36,11 @@ export class PlanetsService {
 
   constructor(private httpClient: HttpClient, private store: Store<SpaceAppState>) {
   }
+}
+
+export function getLoad<T = number>(controls: T[], valueGetter: (T) => string = (v) => v) {
+  return controls.reduce((acc, sample: T) => {
+    acc = acc + parseFloat(valueGetter(sample));
+    return acc;
+  }, 0);
 }

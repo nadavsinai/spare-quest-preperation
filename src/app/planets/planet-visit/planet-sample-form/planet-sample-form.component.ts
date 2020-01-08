@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {IPlanetForm} from '../../common/common.types';
+import {getLoad} from '../../common/planets.service';
 
 function createNewSampleGroup() {
   return new FormGroup({
@@ -10,16 +11,11 @@ function createNewSampleGroup() {
   });
 }
 
-function getLoad(control: FormArray) {
-  return control.controls.reduce((acc, sample: FormGroup) => {
-    acc = acc + parseFloat(sample.get('weight').value);
-    return acc;
-  }, 0);
-}
+const sampleFormGroupValueGetter = (sample) => sample.get('weight');
 
 function maxWeightValidator(maxLoad: number): ValidatorFn {
   return (control: FormArray) => {
-    const load = getLoad(control);
+    const load = getLoad(control.controls, sampleFormGroupValueGetter);
     return (load > maxLoad) ? {maxWeight: 'overWeight!!'} : null;
   }
 }
@@ -67,15 +63,19 @@ export class PlanetSampleFormComponent implements OnInit {
 
   removeSample(index: number) {
     this.samplesArray.removeAt(index);
-    const currentWeight = getLoad(this.sampleForm.get('samples') as FormArray);
-    if (!isNaN(currentWeight)) {
-      this.weightChanged.emit(currentWeight);
-    }
+    this.weightChangedHandler();
   }
 
   getWeight(sample: FormGroup) {
     let number = Math.random() * 100;
     sample.patchValue({weight: number.toFixed(2)});
-    this.weightChanged.emit(getLoad(sample.parent as FormArray));
+    this.weightChangedHandler();
+  }
+
+  weightChangedHandler() {
+    const currentWeight = getLoad((this.sampleForm.get('samples') as FormArray).controls, sampleFormGroupValueGetter);
+    if (!isNaN(currentWeight)) {
+      this.weightChanged.emit(currentWeight);
+    }
   }
 }

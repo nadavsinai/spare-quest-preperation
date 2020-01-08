@@ -48,7 +48,7 @@ export class Appolo extends BaseSpaceShip implements ISpaceship {
 
 export class Genesis extends BaseSpaceShip implements ISpaceship {
   readonly name = 'Genesis';
-  static price = 500_000_000;
+  static price = 200_000_000;
   static complexity = Complexity.HIGH;
   readonly price = Genesis.price;
   complexity = Genesis.complexity;
@@ -63,7 +63,7 @@ export class Genesis extends BaseSpaceShip implements ISpaceship {
 
 export class Enterprise extends BaseSpaceShip implements ISpaceship {
   readonly name = 'Enterprise';
-  static price = 1_000_000_000;
+  static price = 500_000_000;
   static complexity = Complexity.SUPER_HIGH;
   readonly price = Enterprise.price;
   complexity = Enterprise.complexity;

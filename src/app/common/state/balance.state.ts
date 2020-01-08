@@ -22,7 +22,7 @@ export class WithdrawAction implements Action {
 }
 
 export type balanceActions = WithdrawAction | DepositAction;
-const initialBalance = 100_000_000
+const initialBalance = 100_000_000_000_000
 export function balanceReducer(balance: Dollars = initialBalance, action: balanceActions) {
   switch (action.type) {
     case BalanceActionTypes.WITHDRAW:
