@@ -4,6 +4,10 @@ import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {Cords, ShipWithPosition} from '../planets/common/common.types';
 import {NotificationsService} from '../notifications/notifications.service';
+import {spaceshipLost} from './state/spaceship.actions';
+import {SpaceAppState} from '../common/state/app.state';
+import {Store} from '@ngrx/store';
+import {Router} from '@angular/router';
 
 const basePlanetPos: Omit<ShipWithPosition, 'ship'> = {anchorPlanet: 'Earth', move: {x: 0, y: 0}};
 
@@ -14,7 +18,7 @@ export class SpaceshipsService {
   shipsAvailable$: Observable<{ [key: string]: SpaceShipFactory<any> }> = of({Enterprise, Appolo, Genesis});
   private myShips: ShipWithPosition[] = [];
 
-  constructor(private notificationService: NotificationsService) {
+  constructor(private notificationService: NotificationsService, private store: Store<SpaceAppState>, private router: Router) {
   }
 
   constructSpaceShip<T extends ISpaceship>(spaceship: SpaceShipFactory<T>): Promise<T> {
@@ -42,6 +46,22 @@ export class SpaceshipsService {
       let {anchorPlanet, move} = shipObj;
       return {anchorPlanet, move};
     }
+  }
 
+  setPosition(shipOrId: number, anchorPlanet: string, move: Cords = {x: 0, y: 0}) {
+    const ship = this.myShips[shipOrId];
+    if (ship) {
+      ship.anchorPlanet = anchorPlanet;
+      ship.move = move;
+    }
+
+  }
+
+  async onFuelEnd(shipId: number) {
+    const stopNotify = this.notificationService.notify('spaceship lost!');
+    this.myShips.splice(shipId);
+    setTimeout(stopNotify, 5000);
+    this.store.dispatch(spaceshipLost({shipId: shipId}));
+    await this.router.navigateByUrl('/');
   }
 }

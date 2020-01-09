@@ -1,7 +1,24 @@
 // js has types
-
 console.log('something',typeof 'something'); //string
+
 console.log(123,typeof 123) //number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 console.log(12.132143,typeof 12.132143); // number - floats and ints  are the same
 console.log(12n,typeof 12n); // bigint -  we now have bigint
 console.log(true,typeof true); // boolean

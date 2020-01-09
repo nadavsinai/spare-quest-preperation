@@ -1,3 +1,5 @@
+import {Subject} from 'rxjs';
+
 export enum Complexity {
   VERY_LOW = 1,
   LOW,
@@ -35,13 +37,16 @@ export type Octane = number;
 export interface IEngine extends HasPrice, HasComplexity {
   readonly maxSpeed: number;
   readonly fuelSupply: IFuelSupply;
-  started:boolean;
+  started: boolean;
 
   start(): Promise<void>;
 
   stop(): Promise<void>;
 }
 
+export type voidCallback = () => void;
+export type handlerCallback = (event?: any) => void;
+export type removeHandlerCallback = voidCallback;
 export type StopCallback = () => Error | null;
 export type StartCallback = (err: Error | null, stopCb: StopCallback) => void;
 
@@ -49,7 +54,7 @@ export interface IFuelSupply {
   capacity: Liters;
   potency: Octane;
   flow: LitersPerSecond;
-  onFuelEnd: Array<() => void>;
+  onFuelEnd: (callback: handlerCallback) => removeHandlerCallback
   fuelLeft: Liters;
 
 

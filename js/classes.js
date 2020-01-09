@@ -31,6 +31,9 @@ class Engine {
   }
 
   constructor(fuelSupply) { //optional
+    if (!fuelSupply) {
+      throw new Error('Engine must have a fuel supply')
+    }
     this.fuelSupply = fuelSupply;
   }
 
@@ -42,7 +45,17 @@ class Engine {
 }
 
 class JetEngine extends Engine {
-  airDuckt = { open: false, flow: 0 };
+  airDuckt = {
+    open: false, flow: 0,
+    turnOn() {
+      this.open = true;
+      this.flow = 1;
+    },
+    turnOff() {
+      this.airDuckt.flow = 0;
+      this.airDuckt.open = false
+    }
+  };
 
   constructor(pump) {
     super(pump);
@@ -50,14 +63,12 @@ class JetEngine extends Engine {
   }
 
   start() {
-    this.airDuckt.open = true;
-    this.airDuckt.flow = 1;
+    this.airDuckt.turnOn();
     try {
       super.start();
     } catch (e) {
       console.log(e);
-      this.airDuckt.flow = 0;
-      this.airDuckt.open = false
+      this.airDuckt.turnOff();
     }
   }
 
@@ -69,13 +80,13 @@ class JetEngine extends Engine {
 
 const myJet = new JetEngine(new YeOldePetrolFuelSupply());
 myJet.start(); //?
- /// in class exercise
+/// in class exercise
 
- /*
- write another class extending Engine base class, which takes another kind of FuelSupply. make sure to include
- 1. private and public members
- 2. at least one method/override which changes state
- 3. call to super's methods in one of the methods
+/*
+write another class extending Engine base class, which takes another kind of FuelSupply. make sure to include
+1. private and public members
+2. at least one method/override which changes state
+3. call to super's methods in one of the methods
 
 
- * */
+* */

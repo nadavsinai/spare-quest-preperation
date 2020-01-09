@@ -13,8 +13,15 @@ export abstract class BaseEngine implements IEngine {
   start(): Promise<void> {
     return new Promise((resolve, reject) => {
       const pumpStartedCb = (err: Error | null, stopCb: StopCallback) => {
-        this.stopFuelSupply = stopCb;
+        let removeCallback;
+        this.stopFuelSupply = () => {
+          removeCallback();
+          return stopCb();
+        };
         if (!err) {
+          removeCallback = this.fuelSupply.onFuelEnd(() => {
+            this.started = false;
+          });
           this.started = true;
           resolve();
         } else {

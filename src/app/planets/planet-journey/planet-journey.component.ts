@@ -1,17 +1,18 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ISpaceship} from '@algotec/spaceship-parts';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SpaceshipsService} from '../../spaceships/spaceships.service';
 import {destinationPlanetRouteData, shipRouteData} from '../common/common.types';
 import {SpaceshipImageComponent} from '../spaceship-image/spaceship-image.component';
 import {SpaceshipBoxComponent} from '../spaceship-box/spaceship-box.component';
+import {removeHandlerCallback} from '../../../../js/ts/src/spaceship.interfaces';
 
 @Component({
   selector: 'app-planet-journey',
   templateUrl: './planet-journey.component.html',
   styleUrls: ['./planet-journey.component.scss']
 })
-export class PlanetJourneyComponent implements OnInit, AfterViewInit {
+export class PlanetJourneyComponent implements OnInit, AfterViewInit, OnDestroy {
   destination: string;
   ship: ISpaceship;
   @ViewChild(SpaceshipBoxComponent, {read: ElementRef, static: true}) shipElement: ElementRef;
@@ -20,9 +21,10 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
   private currentLeft: number;
   private shipID: number;
   private from: string;
+  private removeFuelEndHandler: removeHandlerCallback;
 
   get journeyComplete() {
-    return this.currentLeft === this.destinationLeft;
+    return this.ship.engine.fuelSupply.fuelLeft === 0 || this.currentLeft === this.destinationLeft;
   }
 
   constructor(private activatedRoute: ActivatedRoute, private spaceshipsSvc: SpaceshipsService, private router: Router) {
@@ -33,6 +35,11 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.removeFuelEndHandler = this.ship.engine.fuelSupply.onFuelEnd(() => this.spaceshipsSvc.onFuelEnd(this.shipID))
+  }
+
+  ngOnDestroy() {
+    this.removeFuelEndHandler();
   }
 
   ngAfterViewInit() {
@@ -48,7 +55,7 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
           this.moveRight();
         });
       } else {
-        this.destinationReached()
+        this.destinationReached();
       }
     }
   }
@@ -57,11 +64,14 @@ export class PlanetJourneyComponent implements OnInit, AfterViewInit {
     this.ship.engine.start().then(() => {
       this.currentLeft = this.shipElement.nativeElement.getBoundingClientRect().x;
       this.moveRight()
+    }).catch((e: Error) => {
+      console.log('failed to start engine', e.message);
     });
   }
 
   private async destinationReached() {
     this.currentLeft = this.destinationLeft;
+    // this.spaceshipsSvc.setPosition(this.shipID, this.destination);
     await this.ship.engine.stop();
     await this.router.navigate(['planet', this.destination], {queryParams: {ship: this.shipID}});
   }

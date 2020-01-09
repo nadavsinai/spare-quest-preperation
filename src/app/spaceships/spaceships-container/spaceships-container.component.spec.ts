@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpaceshipsContainerComponent } from './spaceships-container.component';
 import { Store, StoreModule } from '@ngrx/store';
+import {SpaceAppState} from '../../common/state/app.state';
 
 describe('SpaceshipsContainerComponent', () => {
   let component: SpaceshipsContainerComponent;
@@ -20,7 +21,7 @@ describe('SpaceshipsContainerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SpaceshipsContainerComponent);
     component = fixture.componentInstance;
-    store = TestBed.get<Store>(Store);
+    store = TestBed.get<Store<SpaceAppState>>(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
