@@ -46,6 +46,12 @@ loopOnPlanets();
 //null and undefined represent empty values. null is intended to represent a user-defined absence of something.
 // undefined is a special value indicating the the absence of anything.
 
-const a = undefined; // makes sense?
-let b = a || null; // what is b?
+const noVal = undefined; // makes sense?
+let maybe = noVal || null; // what is b?
 
+console.log(typeof noVal)
+console.log(typeof maybe) // ? null is a
+
+
+//checking for empty value
+//the right way to check if something is either null or undefined is using == null (notice the cohersion equality operator)
