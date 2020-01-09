@@ -11,7 +11,7 @@ function createNewSampleGroup() {
   });
 }
 
-const sampleFormGroupValueGetter = (sample) => sample.get('weight');
+const sampleFormGroupValueGetter = (sample) => sample.get('weight').value;
 
 function maxWeightValidator(maxLoad: number): ValidatorFn {
   return (control: FormArray) => {
