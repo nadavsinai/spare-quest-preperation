@@ -1,9 +1,6 @@
 // js has types
 console.log('something', typeof 'something'); //string
-
 console.log(123, typeof 123) //number
-
-
 console.log(12.132143, typeof 12.132143); // number - floats and ints  are the same
 console.log(12n, typeof 12n); // bigint -  we now have bigint
 console.log(true, typeof true); // boolean
@@ -12,6 +9,10 @@ console.log({}, typeof {}); // object
 // but that's where type logic stops.
 //array is actually a kind of object
 //console.log(['string',121,[{}]],typeof ['string',121,[{}]]); // and you can mix values inside it
+//and really everything is an object
+console.log(2.0.toString); // yep numbers have functions hanging off them too...
+
+ // all except undefined...
 
 // we have constructor based differentiation of objects
 
@@ -61,5 +62,5 @@ y === x;              // true
 y === [1, 2, 3];    // false
 x === [1, 2, 3];    // false
 
-
-
+//lots of info and practices here
+//https://javascript.info/data-types

@@ -1,4 +1,4 @@
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 export enum Complexity {
   VERY_LOW = 1,

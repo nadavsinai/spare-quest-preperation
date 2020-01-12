@@ -1,7 +1,6 @@
 /* tslint:disable */
 import {handlerCallback, IFuelSupply, Liters, LitersPerSecond, Octane, StartCallback, StopCallback} from './spaceship.interfaces';
 import {ModernHyperDriveEngine, RocketEngine} from './engines';
-import {Subject} from 'rxjs';
 
 // only object constructed in the scope of this const will be able to access it
 const privateMap = new WeakMap<IFuelSupply, FuelSupplyPrivateState>();
@@ -167,3 +166,4 @@ export function makeHyperDriveEngine() {
     new NuclearFuelSupply(1000)
   );
 }
+

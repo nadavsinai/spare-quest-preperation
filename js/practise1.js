@@ -1,4 +1,4 @@
-// write a function that takes start and end arguments and produces a range (array)
+// write a function that takes start and end arguments and produces an array with integers in that range (inclusive)
 // if the end is not supplied it returns another function which expects that end arguments
 
 function range(start,end) {
